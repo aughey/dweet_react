@@ -2,13 +2,15 @@
   "name": "dweet_react",
   "version": "0.1.0",
   "private": true,
-  "proxy" : "http://washucsc.org:3000",
+  "proxy": "http://washucsc.org:3000",
   "dependencies": {
+    "canvas-gauges": ">0.0.1",
+    "jquery": ">0.0.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.13",
-    "jquery" : ">0.0.1",
-    "canvas-gauges" : ">0.0.1"
+    "socket.io-client": "^2.0.3",
+    "socket.io-react": "^1.2.0"
   },
   "scripts": {
     "start": "react-scripts start",

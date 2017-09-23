@@ -1,6 +1,6 @@
 import React from 'react';
 
-class DataShower extends React.Component {
+class DataShower extends React.PureComponent {
   render() {
     return (
       <div>

@@ -1,36 +1,52 @@
 import React from 'react';
-import jquery from 'jquery'
+import {SocketProvider} from 'socket.io-react';
+import socketio from 'socket.io-client'
 import DataShower from './DataShower'
 import Graph from './Graph'
 import Gauge from './Gauge'
+import SocketData from './SocketData'
+import SocketImage from './SocketImage'
 
 class DataPoller extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      connected: false
+    }
+  }
   componentDidMount() {
     var self = this;
-    function getData() {
-      self.periodic = null;
-      jquery.get("/dweet/for/aughey/test_sender").then(data => {
-        self.setState(data);
-      }).always(() => {
-        self.periodic = setTimeout(getData,100);
-      });
-    }
-    getData();
+    this.socket = socketio.connect('http://localhost:3000');
+    this.socket.on('connect', () => {
+      console.log("connected")
+      this.setState({
+        connected: true
+      })
+    });
+    this.socket.on('disconnect', () => {
+      this.setState({
+        connected: false
+      })
+    })
   }
-  componentWillUnmount() {
-    clearTimeout(this.periodic);
-  }
+  componentWillUnmount() {}
   render() {
-    if(!this.state) {
-      return <div>No data yet</div>
-    }
-    return (
-      <div>
-          <DataShower content={this.state.data}/>
-          <Graph title="Cosine" value={this.state.data.cos} />
-          <Gauge value={this.state.data.cos}/>
+    if(this.state.connected) {
+      return (
+        <div>
+          <SocketData socket={this.socket} id="aughey/test_sender"/>
+          <SocketImage socket={this.socket} id="aughey/depthbuffer"/>
+          <SocketImage socket={this.socket} id="aughey/framebuffer"/>
         </div>
-    );
+      )
+    } else {
+      return (
+        <div>
+          Not Connected
+        </div>
+      )
+    }
+
   }
 }
 

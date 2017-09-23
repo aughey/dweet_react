@@ -1,7 +1,7 @@
 import React from 'react';
 import Gauges from 'canvas-gauges'
 
-class Gauge extends React.Component {
+class Gauge extends React.PureComponent {
   componentDidMount() {
     var gauge = new Gauges.RadialGauge({
      renderTo: this.el,
