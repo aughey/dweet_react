@@ -9,7 +9,7 @@ class SocketData extends React.Component {
     this.props.socket.emit('sub',{key: this.props.id});
     var update = (data) => {
       this.setState({
-        data: data
+        data: JSON.parse(data)
       })
     }
     this.props.socket.on(this.props.id, update);
@@ -25,7 +25,7 @@ class SocketData extends React.Component {
       );
     } else {
       return (
-        <div>{JSON.stringify(this.state.data)}</div>
+        <pre>{JSON.stringify(this.state.data,null,'  ')}</pre>
       )
     }
   }

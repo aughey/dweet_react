@@ -3,7 +3,7 @@ const http = require('http')
 var start = new Date().getTime();
 function post() {
   var options = {
-    hostname: 'localhost',
+    hostname: 'washucsc.org',
     port: 3000,
     path: '/dweet/temp/aughey/test_sender',
     method: "POST",

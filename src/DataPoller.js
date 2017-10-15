@@ -16,7 +16,7 @@ class DataPoller extends React.Component {
   }
   componentDidMount() {
     var self = this;
-    this.socket = socketio.connect('http://localhost:3000');
+    this.socket = socketio.connect('http://washucsc.org:3000');
     this.socket.on('connect', () => {
       console.log("connected")
       this.setState({
@@ -31,12 +31,12 @@ class DataPoller extends React.Component {
   }
   componentWillUnmount() {}
   render() {
+    //<SocketImage socket={this.socket} id="aughey/depthbuffer"/>
+    //<SocketImage socket={this.socket} id="aughey/framebuffer"/>
     if(this.state.connected) {
       return (
         <div>
           <SocketData socket={this.socket} id="aughey/test_sender"/>
-          <SocketImage socket={this.socket} id="aughey/depthbuffer"/>
-          <SocketImage socket={this.socket} id="aughey/framebuffer"/>
         </div>
       )
     } else {
